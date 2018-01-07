@@ -7,13 +7,12 @@ class Component{
 }
 
 class CellComponent extends Component{
-    constructor(){
+    constructor(handleCellClick){
         super();
         this._state = 'unknown';
         this._element = document.createElement('td');
-        // const self = this;
         this._element.addEventListener('click', (function() {
-            this.setState('miss');
+            handleCellClick();
         }).bind(this));
         this._refresh();
     }
@@ -29,7 +28,22 @@ class CellComponent extends Component{
     }
 }
 
-const myCell = new CellComponent();
+class GameController {
+    constructor(cell){
+        this._cell = cell;
+    }
+    handleCellClick(){
+        this._cell.setState('miss');
+    }
+}
+
+let myController;
+function handleCellClick(){
+    myController.handleCellClick();
+}
+const myCell = new CellComponent(handleCellClick);
+myController = new GameController(myCell);
+
 document
     .getElementById('cellContainer')
     .appendChild(myCell.getElement());
