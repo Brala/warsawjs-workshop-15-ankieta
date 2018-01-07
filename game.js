@@ -5,7 +5,7 @@ cell.appendChild(textNode);
 gameContainer.appendChild(cell);
 
 let onClick = function onClick(){
-    
+    cell.textContent = "Clicked";
 }
 
 cell.addEventListener("click", onClick);
